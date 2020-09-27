@@ -1,7 +1,7 @@
 #include "ppool_queue.h"
 
 int ppool_queue_get_insert_pos(pool_node *head,int priority);
-//æŸ¥è¯¢æ’å…¥çš„ä½ç½®
+//²éÑ¯²åÈëµÄÎ»ÖÃ
 
 pool_w *ppool_queue_init(void)
 {

@@ -10,40 +10,40 @@ typedef void (*ppool_work)(void *);
 
 typedef struct ppool_node
 {
-	int priority; //ä¼˜å…ˆçº§
-	ppool_work task; //ä»»åŠ¡
-	void *arg; //å‚æ•°
+	int priority; //ÓÅÏÈ¼¶
+	ppool_work task; //ÈÎÎñ
+	void *arg; //²ÎÊı
 
 	struct ppool_node *next;
 }pool_node;
 
-//ä»»åŠ¡åˆ—è¡¨å¤´æŒ‡é’ˆ
+//ÈÎÎñÁĞ±íÍ·Ö¸Õë
 typedef struct
 {
-	int len; //ä»»åŠ¡æ•°é‡
-	pool_node *head; //åˆ—è¡¨å¤´æŒ‡é’ˆ
+	int len; //ÈÎÎñÊıÁ¿
+	pool_node *head; //ÁĞ±íÍ·Ö¸Õë
 }pool_w;
 
 pool_w *ppool_queue_init(void);
-//åˆå§‹åŒ–ä¸€ä¸ªä»»åŠ¡åˆ—è¡¨
+//³õÊ¼»¯Ò»¸öÈÎÎñÁĞ±í
 
 pool_node *ppool_queue_new(ppool_work task,void *arg,int priority);
-/* åˆ›å»ºä¸€ä¸ªèŠ‚ç‚¹
- * taskä¸ºæ–°ä»»åŠ¡
- * argä¸ºä»»åŠ¡å‚æ•°
- * priorityä¸ºè¯¥ä»»åŠ¡ä¼˜å…ˆçº§
+/* ´´½¨Ò»¸ö½Úµã
+ * taskÎªĞÂÈÎÎñ
+ * argÎªÈÎÎñ²ÎÊı
+ * priorityÎª¸ÃÈÎÎñÓÅÏÈ¼¶
  */
 
 void ppool_queue_add(pool_w *head,pool_node *node);
-// æ·»åŠ ä¸€ä¸ªä»»åŠ¡
+// Ìí¼ÓÒ»¸öÈÎÎñ
 
 pool_node *ppool_queue_get_task(pool_w *head);
-//è·å–ä¸€ä¸ªä»»åŠ¡
+//»ñÈ¡Ò»¸öÈÎÎñ
 
 void ppool_queue_cleanup(pool_w *head);
-//æ¸…ç†ä»»åŠ¡åˆ—è¡¨
+//ÇåÀíÈÎÎñÁĞ±í
 
 void ppool_queue_destroy(pool_w *head);
-//é”€æ¯ä»»åŠ¡åˆ—è¡¨
+//Ïú»ÙÈÎÎñÁĞ±í
 
 #endif

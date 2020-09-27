@@ -1,6 +1,6 @@
 #include "ppool.h"
 
-//çº¿ç¨‹æ± æ‰§è¡Œä»»åŠ¡å‡½æ•°
+//Ïß³Ì³ØÖ´ĞĞÈÎÎñº¯Êı
 void ppool_run(pool_t *pool);
 
 pool_t *ppool_init(int pool_max_num)
@@ -16,7 +16,7 @@ pool_t *ppool_init(int pool_max_num)
 		return NULL;
 	}
 
-	//åˆ›å»ºä»»åŠ¡é˜Ÿåˆ—
+	//´´½¨ÈÎÎñ¶ÓÁĞ
 	head=ppool_queue_init();
 	if(!head)
 	{
@@ -65,7 +65,7 @@ pool_t *ppool_init(int pool_max_num)
 		return NULL;
 	}
 
-	//åˆ›å»ºä»»åŠ¡
+	//´´½¨ÈÎÎñ
 	for(i=0;i < pool_max_num;++i)
 	{
 		if(pthread_create(&pool->id[i],NULL,(void *)ppool_run,pool) == 0)
