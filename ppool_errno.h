@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-extern int ppool_errno; //错误代码变量
+extern int ppool_errno; //閿欒浠ｇ爜鍙橀噺
 
 #define PE_OK 0
 #define PE_POOL_NO_MEM -1
@@ -15,10 +15,10 @@ extern int ppool_errno; //错误代码变量
 #define PE_PRIORITY_ERROR -6
 #define PE_QUEUE_NODE_NO_MEM -7
 
-//打印错误信息
+//鎵撳嵃閿欒淇℃伅
 void ppool_error(const char *msg);
 
-//根据错误代码代码打印错误信息
+//鏍规嵁閿欒浠ｇ爜浠ｇ爜鎵撳嵃閿欒淇℃伅
 char *ppool_strerr(int errno);
 
 #endif

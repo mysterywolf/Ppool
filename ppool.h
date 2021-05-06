@@ -16,30 +16,30 @@ pthread_mutex_t PPOOL_LOCK;
 
 typedef struct
 {
-	int pool_max_num; //Ïß³Ì³Ø×î´óÏß³ÌÊıÁ¿
-	int rel_num; //Ïß³Ì³ØÖĞÊµÀıÏß³ÌÊı
-	pool_w *head; //Ïß³ÌÍ·
-	pthread_t *id; //Ïß³Ìid
+    int pool_max_num; //çº¿ç¨‹æ± æœ€å¤§çº¿ç¨‹æ•°é‡
+    int rel_num; //çº¿ç¨‹æ± ä¸­å®ä¾‹çº¿ç¨‹æ•°
+    pool_w *head; //çº¿ç¨‹å¤´
+    pthread_t *id; //çº¿ç¨‹id
 
-	pthread_mutex_t ppool_lock;
-	pthread_cond_t ppool_cond;
+    pthread_mutex_t ppool_lock;
+    pthread_cond_t ppool_cond;
 }pool_t;
 
-//ÈÎÎñÊı¾İ½á¹¹
+//ä»»åŠ¡æ•°æ®ç»“æ„
 typedef struct
 {
-	int priority; //ÓÅÏÈ¼¶
-	ppool_work task; //ÈÎÎñ
-	void *arg; //²ÎÊı
+    int priority; //ä¼˜å…ˆçº§
+    ppool_work task; //ä»»åŠ¡
+    void *arg; //å‚æ•°
 }pool_task;
 
-//³õÊ¼»¯Ò»¸öÏß³Ì³Ø
+//åˆå§‹åŒ–ä¸€ä¸ªçº¿ç¨‹æ± 
 pool_t *ppool_init(int pool_max_num);
 
-//ÏòÏß³Ì³ØÖĞÌí¼ÓÒ»¸öÈÎÎñ
+//å‘çº¿ç¨‹æ± ä¸­æ·»åŠ ä¸€ä¸ªä»»åŠ¡
 pbool ppool_add(pool_t *pool,pool_task *task);
 
-//Ïú»ÙÒ»¸öÏß³Ì³Ø
+//é”€æ¯ä¸€ä¸ªçº¿ç¨‹æ± 
 void ppool_destroy(pool_t *pool);
 
 #endif

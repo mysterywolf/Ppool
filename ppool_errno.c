@@ -4,33 +4,33 @@ int ppool_errno=0;
 
 void ppool_error(const char *msg)
 {
-	if(!msg)
-		printf("%s\n",ppool_strerr(ppool_errno));
-	else
-		printf("%s : %s\n",ppool_strerr(ppool_errno));
+    if(!msg)
+        printf("%s\n",ppool_strerr(ppool_errno));
+    else
+        printf("%s : %s\n",ppool_strerr(ppool_errno));
 }
 
 char *ppool_strerr(int errno)
 {
-	switch(errno)
-	{
-		case 0:
-			return "³É¹¦!";
-		case -1:
-			return "ÎŞ·¨ÎªÏß³Ì³Ø¿ª±Ù¿Õ¼ä£¬´´½¨Ïß³Ì³ØÊ§°Ü!";
-		case -2:
-			return "ÎŞ·¨Îª´ËÊıÁ¿µÄÏß³Ì·ÖÅä×ã¹»µÄÄÚ´æ!";
-		case -3:
-			return "pthread³õÊ¼»¯»¥³âËøÊ§°Ü£¬ÇëÊ¹ÓÃppool_error²é¿´¸ü¶àĞÅÏ¢!";
-		case -4:
-			return "pthread³õÊ¼»¯Ìõ¼ş±äÁ¿Ê§°Ü£¬ÇëÊ¹ÓÃppool_error²é¿´¸ü¶àĞÅÏ¢!";
-		case -5:
-			return "ÎŞ·¨ÎªÈÎÎñ¶ÓÁĞ¿ª±Ù¿Õ¼ä!";
-		case -6:
-			return "´íÎóµÄÓÅÏÈ¼¶!";
-		case -7:
-			return "ÎŞ·¨Îª¶ÓÁĞ±û´´½¨Ò»¸ö½áµã£¬¿ª±ÙÄÚ´æ³ö´í!";
-		default:
-			return "Î´Öª´íÎó!";
-	}
+    switch(errno)
+    {
+        case 0:
+            return "æˆåŠŸ!";
+        case -1:
+            return "æ— æ³•ä¸ºçº¿ç¨‹æ± å¼€è¾Ÿç©ºé—´ï¼Œåˆ›å»ºçº¿ç¨‹æ± å¤±è´¥!";
+        case -2:
+            return "æ— æ³•ä¸ºæ­¤æ•°é‡çš„çº¿ç¨‹åˆ†é…è¶³å¤Ÿçš„å†…å­˜!";
+        case -3:
+            return "pthreadåˆå§‹åŒ–äº’æ–¥é”å¤±è´¥ï¼Œè¯·ä½¿ç”¨ppool_erroræŸ¥çœ‹æ›´å¤šä¿¡æ¯!";
+        case -4:
+            return "pthreadåˆå§‹åŒ–æ¡ä»¶å˜é‡å¤±è´¥ï¼Œè¯·ä½¿ç”¨ppool_erroræŸ¥çœ‹æ›´å¤šä¿¡æ¯!";
+        case -5:
+            return "æ— æ³•ä¸ºä»»åŠ¡é˜Ÿåˆ—å¼€è¾Ÿç©ºé—´!";
+        case -6:
+            return "é”™è¯¯çš„ä¼˜å…ˆçº§!";
+        case -7:
+            return "æ— æ³•ä¸ºé˜Ÿåˆ—ä¸™åˆ›å»ºä¸€ä¸ªç»“ç‚¹ï¼Œå¼€è¾Ÿå†…å­˜å‡ºé”™!";
+        default:
+            return "æœªçŸ¥é”™è¯¯!";
+    }
 }
