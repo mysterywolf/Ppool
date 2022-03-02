@@ -7,7 +7,7 @@ void ppool_error(const char *msg)
     if(!msg)
         printf("%s\n",ppool_strerr(ppool_errno));
     else
-        printf("%s : %s\n",ppool_strerr(ppool_errno));
+        printf("%s : %s\n",ppool_strerr(ppool_errno), msg);
 }
 
 char *ppool_strerr(int errno)
