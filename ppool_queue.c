@@ -1,3 +1,4 @@
+#include <rtthread.h>
 #include "ppool_queue.h"
 
 int ppool_queue_get_insert_pos(pool_node *head,int priority);
@@ -7,7 +8,7 @@ pool_w *ppool_queue_init(void)
 {
     pool_w *head;
 
-    head=malloc(sizeof(pool_w));
+    head=rt_malloc(sizeof(pool_w));
     if(!head)
     {
         ppool_errno=PE_QUEUE_NO_MEM;
@@ -30,7 +31,7 @@ pool_node *ppool_queue_new(ppool_work task,void *arg,int priority)
         return NULL;
     }
 
-    node=malloc(sizeof(pool_node));
+    node=rt_malloc(sizeof(pool_node));
     if(node == NULL)
     {
         ppool_errno=PE_QUEUE_NODE_NO_MEM;
@@ -100,7 +101,7 @@ void ppool_queue_cleanup(pool_w *head)
         temp=h;
         h=h->next;
 
-        free(temp);
+        rt_free(temp);
     }
 
     head->len=0;
@@ -117,10 +118,10 @@ void ppool_queue_destroy(pool_w *head)
         temp=h;
         h=h->next;
 
-        free(temp);
+        rt_free(temp);
     }
 
-    free(head);
+    rt_free(head);
 }
 
 int ppool_queue_get_insert_pos(pool_node *head,int priority)

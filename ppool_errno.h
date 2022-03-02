@@ -18,7 +18,4 @@ extern int ppool_errno; //错误代码变量
 //打印错误信息
 void ppool_error(const char *msg);
 
-//根据错误代码代码打印错误信息
-char *ppool_strerr(int errno);
-
 #endif

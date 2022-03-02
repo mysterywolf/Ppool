@@ -1,16 +1,9 @@
+#include <rtthread.h>
 #include "ppool_errno.h"
 
 int ppool_errno=0;
 
-void ppool_error(const char *msg)
-{
-    if(!msg)
-        printf("%s\n",ppool_strerr(ppool_errno));
-    else
-        printf("%s : %s\n",ppool_strerr(ppool_errno), msg);
-}
-
-char *ppool_strerr(int errno)
+static const char *ppool_strerr(int errno)
 {
     switch(errno)
     {
@@ -33,4 +26,12 @@ char *ppool_strerr(int errno)
         default:
             return "未知错误!";
     }
+}
+
+void ppool_error(const char *msg)
+{
+    if(!msg)
+        rt_kprintf("%s\n", ppool_strerr(ppool_errno));
+    else
+        rt_kprintf("%s : %s\n", ppool_strerr(ppool_errno), msg);
 }

@@ -1,3 +1,4 @@
+#include <rtthread.h>
 #include "ppool.h"
 
 //线程池执行任务函数
@@ -9,7 +10,7 @@ pool_t *ppool_init(int pool_max_num)
     pool_w *head;
     int i;
 
-    pool=malloc(sizeof(pool_t));
+    pool=rt_malloc(sizeof(pool_t));
     if(!pool)
     {
         ppool_errno=PE_POOL_NO_MEM;
@@ -20,19 +21,19 @@ pool_t *ppool_init(int pool_max_num)
     head=ppool_queue_init();
     if(!head)
     {
-        free(pool);
+        rt_free(pool);
         return NULL;
     }
 
     pool->pool_max_num=pool_max_num;
     pool->rel_num=0;
     pool->head=head;
-    pool->id=malloc(sizeof(pthread_t)*pool_max_num);
+    pool->id=rt_malloc(sizeof(pthread_t)*pool_max_num);
     if(!pool->id)
     {
         ppool_errno=PE_THREAD_NO_MEM;
-        free(head);
-        free(pool);
+        rt_free(head);
+        rt_free(pool);
 
         return NULL;
     }
@@ -40,27 +41,27 @@ pool_t *ppool_init(int pool_max_num)
     if(pthread_mutex_init(&pool->ppool_lock,NULL) != 0)
     {
         ppool_errno=PE_THREAD_MUTEX_ERROR;
-        free(pool->id);
-        free(head);
-        free(pool);
+        rt_free(pool->id);
+        rt_free(head);
+        rt_free(pool);
 
         return NULL;
     }
     if(pthread_mutex_init(&PPOOL_LOCK,NULL) != 0)
     {
         ppool_errno=PE_THREAD_MUTEX_ERROR;
-        free(pool->id);
-        free(head);
+        rt_free(pool->id);
+        rt_free(head);
         pthread_mutex_destroy(&pool->ppool_lock);
-        free(pool);
+        rt_free(pool);
     }
     if(pthread_cond_init(&pool->ppool_cond,NULL) != 0)
     {
         ppool_errno=PE_THREAD_COND_ERROR;
-        free(pool->id);
-        free(head);
+        rt_free(pool->id);
+        rt_free(head);
         pthread_mutex_destroy(&pool->ppool_lock);
-        free(pool);
+        rt_free(pool);
 
         return NULL;
     }
@@ -101,13 +102,13 @@ void ppool_destroy(pool_t *pool)
 
     for(i=0;i < pool->pool_max_num;++i)
         pthread_cancel(pool->id[i]);
-    free(pool->id);
+    rt_free(pool->id);
 
     pthread_mutex_destroy(&pool->ppool_lock);
     pthread_mutex_destroy(&PPOOL_LOCK);
     pthread_cond_destroy(&pool->ppool_cond);
 
-    free(pool);
+    rt_free(pool);
 }
 
 void ppool_run(pool_t *pool)
@@ -125,6 +126,6 @@ void ppool_run(pool_t *pool)
         if(task == NULL) continue;
         task->task(task->arg);
 
-        free(task);
+        rt_free(task);
     }
 }
